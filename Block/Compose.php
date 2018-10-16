@@ -37,13 +37,15 @@ class Compose extends \Engin\Block\Common
     /**
      * Add block to end of block list
      * 
-     * @param \Engin\Block\Common $block appended block
+     * @param \Engin\Block\Common ...$blocks appended block
      *
      * @return null
      */
-    public function append(\Engin\Block\Common $block)
+    public function append(\Engin\Block\Common ...$blocks)
     {
-        $this->blocks[] = $block;
+        foreach ($blocks as $block) {
+            $this->blocks[] = $block;
+        }
     }
 }
 ?>
