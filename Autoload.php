@@ -23,6 +23,7 @@ require_once 'Engin/Logger/File.php';
 require_once 'Engin/Logger/Notice.php';
 require_once 'Engin/Logger/Warning.php';
 require_once 'Engin/Logger/Error.php';
+require_once 'Engin/Logger/Out.php';
 require_once 'Engin/Error/Logger/Manager.php';
 require_once 'Engin/Driver/Common.php';
 require_once 'Engin/Driver/File.php';

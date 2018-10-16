@@ -19,7 +19,7 @@ namespace Engin\Common;
 abstract class Singleton
 {
     /* store for class instance*/
-    protected static $instance;
+    protected static $instance = [];
 
     /**
      * Disabled constructor
@@ -35,10 +35,11 @@ abstract class Singleton
      */ 
     public static function getInstance()
     {
-        if (empty(static::$instance)) {
-            static::$instance = new static();
+        $className = get_called_class();
+        if (empty(static::$instance[$className])) {
+            static::$instance[$className] = new static();
         }
-        return static::$instance;
+        return static::$instance[$className];
     }
 }
 ?>

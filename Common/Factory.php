@@ -17,12 +17,12 @@ namespace Engin\Common;
  */
 abstract class Factory
 {
-    protected static $instances;
+    protected static $instances = [];
 
     /**
      * Disable constructor
      *
-     * @param mixed ..$params one or more params
+     * @param mixed ...$params one or more params
      */
     protected function __construct(...$params)
     {
@@ -39,12 +39,14 @@ abstract class Factory
     public static function getInstance(...$params)
     {
         $hash = serialize($params);
-        if (empty(static::$instances[$hash])) {
-            //$reflection = new \ReflectionClass(get_called_class());
-            //static::$instances[$hash] = $reflection->newInstanceArgs($params);
-            static::$instances[$hash] = new static(...$params);
+        $className = get_called_class();
+        if (!isset(static::$instances[$className])) {
+            static::$instances[$className] = [];
         }
-        return static::$instances[$hash];
+        if (empty(static::$instances[$className][$hash])) {
+            static::$instances[$className][$hash] = new static(...$params);
+        }
+        return static::$instances[$className][$hash];
     }
 }
 ?>

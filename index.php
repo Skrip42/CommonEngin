@@ -13,14 +13,13 @@
  */
 namespace Engin;
 try {
-    echo "welcom to CommonEngin!";
-
     include_once 'Engin/Autoloader.php';
 
-    $class = new unnessesaryClass();
-    //$driver = \Engin\Driver\File::getInstance('adds', 1, true, 'common');
+    $uri = $_SERVER['REQUEST_URI'];
+    $page = \Engin\Page\Manager::getInstance()->byUrl($uri);
+    echo $page->render();
 } catch (\ErrorException $e) {
     \Engin\Error\Logger\Manager::getInstance()->log($e);
-    //\Engin\Logger\Out::getInstance()->send($e->getMessage());
+    \Engin\Logger\Out::getInstance()->send($e->getMessage());
 }
 ?>

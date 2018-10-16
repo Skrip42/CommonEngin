@@ -26,7 +26,8 @@ require_once 'Engin/Autoload.php';
  */
 function autoloader(string $class)
 {
-    $filename = str_replace('\\', '/', $class);
+    $filename = str_replace('\\', '/', $class) . '.php';
+    $filename = trim($filename, '/');
     if (!file_exists($filename)) {
         throw new \Engin\Exception\Unexepted($class);
     }
