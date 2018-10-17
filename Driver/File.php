@@ -20,6 +20,22 @@ class File extends \Engin\Driver\Common
     /* file descriptor*/
     protected $file;
 
+    protected $filename;
+    protected $mode;
+
+    /**
+     * Returned file description
+     *
+     * @return mixed
+     */
+    protected function getFileDescription()
+    {
+        if (empty($this->file)) {
+            $this->file = fopen($this->filename, $this->mode);
+        }
+        return $this->file;
+    }
+
     /**
      * Constructor
      *
@@ -28,7 +44,9 @@ class File extends \Engin\Driver\Common
      */
     protected function __construct(string $filename, string $mode = 'a+t')
     {
-        $this->file = fopen($filename, $mode);
+        //$this->file = fopen($filename, $mode);
+        $this->filename = $filename;
+        $this->mode = $mode;
     }
 
     /**
@@ -40,9 +58,9 @@ class File extends \Engin\Driver\Common
      */
     public function append($text)
     {
-        flock($this->file, \LOCK_EX);
+        flock($this->getFileDescription(), \LOCK_EX);
         $count = fputs($this->file, $text);
-        flock($this->file, \LOCK_UN);
+        flock($this->getFileDescription(), \LOCK_UN);
         return $count;
     }
 
@@ -53,7 +71,7 @@ class File extends \Engin\Driver\Common
      */
     public function flush()
     {
-        return fflush($this->file);
+        return fflush($this->getFileDescription());
     }
 
     /**
@@ -61,6 +79,9 @@ class File extends \Engin\Driver\Common
      */
     public function __destruct()
     {
+        if (empty($this->file)) {
+            return;
+        }
         $this->flush();
         fclose($this->file);
     }

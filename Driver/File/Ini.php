@@ -17,20 +17,6 @@ namespace Engin\Driver\File;
  */
 class Ini extends \Engin\Driver\File
 {
-    /* name of file*/
-    protected $fileName;
-    
-    /**
-     * Construct.
-     *
-     * @param string $filename name of file
-     */
-    protected function __construct(string $filename)
-    {
-        $this->fileName = $filename;
-        parent::__construct($filename);
-    }
-
     /**
      * Returned flat array from ini file
      *
@@ -38,7 +24,7 @@ class Ini extends \Engin\Driver\File
      */
     public function getFlatArray()
     {
-        return parse_ini_file($this->fileName, false, \INI_SCANNER_RAW);
+        return parse_ini_file($this->filename, false, \INI_SCANNER_RAW);
     }
     
     /**
@@ -48,7 +34,7 @@ class Ini extends \Engin\Driver\File
      */
     public function getSectionArray()
     {
-        return parse_ini_file($this->fileName, true, \INI_SCANNER_RAW);
+        return parse_ini_file($this->filename, true, \INI_SCANNER_RAW);
     }
 }
 ?>

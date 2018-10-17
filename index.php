@@ -17,6 +17,7 @@ try {
 
     $uri = $_SERVER['REQUEST_URI'];
     $page = \Engin\Page\Manager::getInstance()->byUrl($uri);
+    $page->eval();
     echo $page->render();
 } catch (\ErrorException $e) {
     \Engin\Error\Logger\Manager::getInstance()->log($e);

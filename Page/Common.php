@@ -18,6 +18,15 @@ namespace Engin\Page;
 abstract class Common extends \Engin\Common\Singleton
 {
     /**
+     * Run page logick
+     *
+     * @return null
+     */
+    public function eval()
+    {
+    }
+
+    /**
      * Drow page
      *
      * @return string 

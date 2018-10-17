@@ -26,7 +26,6 @@ abstract class Factory
      */
     protected function __construct(...$params)
     {
-        var_dump($params);
     }
 
     /**
