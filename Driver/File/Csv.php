@@ -44,7 +44,7 @@ class Csv extends \Engin\Driver\File
         while ($line = fgetcsv($this->getFileDescription())) {
             $aLine = [];
             for ($i = 0; $i < count($line); $i++) {
-               $aLine[$handle[$i] ?? $i] = $line[$i]; 
+                $aLine[$handle[$i] ?? $i] = $line[$i]; 
             }
             $array[] = $aLine;
         }
