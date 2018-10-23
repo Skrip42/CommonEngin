@@ -17,6 +17,23 @@ namespace Engin\Block;
  */
 class Body extends \Engin\Block\Compose
 {
+    /* skript storage*/
+    protected $script = [];
+    
+    /**
+     * Building script string;
+     *
+     * @return string script string
+     */
+    protected function buildScript()
+    {
+        $string = '';
+        foreach ($this->script as $script) {
+            $string .= '<script src="' . $script . '"></script>';
+        }
+        return $string;
+    }
+    
     /**
      * Return html body string
      *
@@ -26,8 +43,21 @@ class Body extends \Engin\Block\Compose
     {
         $string = '<body>';
         $string .= parent::getHtml();
+        $string .= $this->buildScript();
         $string .= '</body>';
         return $string;
+    }
+
+    /**
+     * Adding skript to body
+     *
+     * @param string $name name of skript
+     *
+     * @return null
+     */
+    public function addScript(string $name)
+    {
+        $this->script[] = $name;
     }
 }
 ?>

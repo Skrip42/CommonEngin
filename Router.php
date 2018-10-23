@@ -42,6 +42,10 @@ class Router extends \Engin\Common\Singleton
      */
     public function getPageNameFromUrl($url)
     {
+        $getStart = strpos($url, '?');
+        if ($getStart) {
+            $url = substr($url, 0, $getStart);
+        }
         foreach ($this->_routs as $pattern => $pageName) {
             if (preg_match("~^$pattern$~", $url)) {
                 return 'Page\\' . $pageName;
